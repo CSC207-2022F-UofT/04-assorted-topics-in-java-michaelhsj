@@ -7,6 +7,7 @@
  * created the constructor for you already.
  */
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +29,13 @@ class DrivableMap {
      *       Return true if the Drivable was added to drivable_map.
      */
 
+    public boolean addDrivable(String id, Drivable obj){
+        if (!this.drivable_map.containsKey(id)){
+            this.drivable_map.put(id, obj);
+            return true;
+        }
+        return false;
+    }
 
 
 
@@ -38,8 +46,14 @@ class DrivableMap {
      * iterate through drivable_map.
      */
 
-
-
+    boolean hasFasterThan(int speed){
+        for (Drivable obj : this.drivable_map.values()){
+            if (obj.getMaxSpeed() >= speed){
+                return true;
+            }
+        }
+        return false;
+    }
 
 
     /* TODO: Write a method named getTradable that takes no arguments and
@@ -47,7 +61,15 @@ class DrivableMap {
      *       drivable_map.
      */
 
-
+    public ArrayList getTradable(){
+        ArrayList<Drivable> out = new ArrayList<Drivable>();
+        for (Drivable obj : this.drivable_map.values()){
+            if (obj instanceof Tradable){
+                out.add(obj);
+            }
+        }
+        return out;
+    }
 
     
 }
